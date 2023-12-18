@@ -1,0 +1,23 @@
+{
+    "name": "igorolikov/php-oop-framework",
+    "type": "project",
+    "authors": [
+        {
+            "name": "IgorOlikov",
+            "email": "i.olikov@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Framework\\": "framework"
+        },
+        "require": {
+            "php": "^8.2"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^7.0",
+        "laravel/pint": "^1.13"
+    }
+}
