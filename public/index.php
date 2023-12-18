@@ -1,19 +1,17 @@
 <?php
 
 require_once dirname(__DIR__).'/vendor/autoload.php';
-//require_once __DIR__.'/../vendor/autoload.php';
-
 
 
 use Framework\Http\Request;
+use Framework\Http\Response;
 
 
-$aaa = new Request();
-//$bbb = new TestClass();
+$request = Request::createFromGlobals();
 
-phpinfo();
 
-dd(dirname(__DIR__).'/vendor/autoload.php');
-//dd($bbb->test());
-dd($aaa->createFromGlobals());
+$content = '<h1>Hello, World!</h1>';
 
+$response = new Response($content, 200, []);
+
+print  $response->send();
