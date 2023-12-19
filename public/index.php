@@ -18,4 +18,4 @@ $kernel = new Kernel($router);
 $response = $kernel->handle($request);
 
 
-print  $response->send();
+$response->send();
