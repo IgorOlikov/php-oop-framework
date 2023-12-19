@@ -2,14 +2,8 @@
 
 namespace Framework\Http;
 
-use FastRoute\RouteCollector;
 use Framework\Http\Exceptions\HttpException;
-use Framework\Http\Exceptions\MethodNotAllowedException;
-use Framework\Http\Exceptions\RouteNotFoundException;
-use Framework\Http\Response;
-
 use Framework\Routing\RouterInterface;
-use function FastRoute\simpleDispatcher;
 
 class Kernel
 {

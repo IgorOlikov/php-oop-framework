@@ -1,9 +1,9 @@
 <?php
 
 
-use Framework\Routing\Route;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
+use Framework\Routing\Route;
 
 
 return [

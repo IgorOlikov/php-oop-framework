@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
 use Framework\Http\Response;
-
 class PostController
 {
 

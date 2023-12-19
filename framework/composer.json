@@ -1,0 +1,19 @@
+{
+    "name": "igorolikov/php-oop-framework",
+    "type": "project",
+    "authors": [
+        {
+            "name": "IgorOlikov",
+            "email": "i.olikov@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "src"
+        }
+    },
+        "require": {
+            "nikic/fast-route": "^1.3"
+        }
+}

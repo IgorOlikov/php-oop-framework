@@ -1,25 +1,22 @@
 {
-    "name": "igorolikov/php-oop-framework",
-    "type": "project",
-    "authors": [
-        {
-            "name": "IgorOlikov",
-            "email": "i.olikov@mail.ru"
-        }
-    ],
     "autoload": {
         "psr-4": {
-            "Framework\\": "framework",
             "App\\": "app"
         }
     },
-        "require-dev": {
+        "repositories": [{
+            "type": "path",
+            "url": "framework"
+        }
+        ],
+    "require-dev": {
             "symfony/var-dumper": "^7.0",
             "laravel/pint": "^1.13"
         },
         "require": {
             "php": "^8.2",
-            "nikic/fast-route": "^1.3"
+            "igorolikov/php-oop-framework": "dev-main"
+
         }
 
 }
