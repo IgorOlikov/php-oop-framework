@@ -11,12 +11,15 @@
         "psr-4": {
             "Framework\\": "framework",
             "App\\": "app"
-        },
-    "require": {
-        "php": "^8.2"
+        }
     },
-    "require-dev": {
-        "symfony/var-dumper": "^7.0",
-        "laravel/pint": "^1.13"
-    }
+        "require-dev": {
+            "symfony/var-dumper": "^7.0",
+            "laravel/pint": "^1.13"
+        },
+        "require": {
+            "php": "^8.2",
+            "nikic/fast-route": "^1.3"
+        }
+
 }
