@@ -29,4 +29,31 @@ class ContainerTest extends TestCase
 
     }
 
+    public function test_has_method()
+    {
+        $container = new Container();
+
+        //$this->expectException(ContainerException::class);
+
+        $container->add('somecode-class', SomecodeClass::class);
+        $container->add('no-class', SomecodeClass::class);
+        $this->assertTrue($container->has('somecode-class'));
+        $this->assertTrue($container->has('no-class'));
+    }
+
+    public function test_recursively_autowired()
+    {
+        $container = new Container();
+
+        $container->add('somecode-class', SomecodeClass::class);
+
+        /** @var SomecodeClass $somecode */
+        $somecode = $container->get('somecode-class');
+        $areaweb = $somecode->getAreaWeb();
+
+        $this->assertInstanceOf(AreaWeb::class, $somecode->getAreaWeb());
+        $this->assertInstanceOf(Yotube::class, $areaweb->getYotube());
+        $this->assertInstanceOf(Telegram::class, $areaweb->getTelegram());
+    }
+
 }
