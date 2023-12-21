@@ -7,20 +7,22 @@ use FastRoute\RouteCollector;
 use Framework\Http\Exceptions\MethodNotAllowedException;
 use Framework\Http\Exceptions\RouteNotFoundException;
 use Framework\Http\Request;
+use League\Container\Container;
 use function FastRoute\simpleDispatcher;
 
 class Router implements RouterInterface
 {
     private array $routes = [];
 
-    public function dispatch(Request $request)
+    public function dispatch(Request $request,Container $container)
     {
         [$handler, $vars] = $this->extractRouteInfo($request);
 
 
         if (is_array($handler)) {
-            [$controller, $method] = $handler;
-            $handler = [new $controller, $method];
+            [$controllerId, $method] = $handler;
+            $controller = $container->get($controllerId);
+            $handler = [$controller, $method];
         }
         return [ $handler, $vars];
     }
