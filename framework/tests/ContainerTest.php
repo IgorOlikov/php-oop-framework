@@ -5,10 +5,17 @@ namespace Framework\Tests;
 use Framework\Container\Container;
 use Framework\Container\Exceptions\ContainerException;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class ContainerTest extends TestCase
 {
     //lando php vendor/bin/phpunit tests --color
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws ContainerException
+     * @throws NotFoundExceptionInterface
+     */
     public function test_getting_service_from_container()
     {
         $container = new Container();
@@ -29,6 +36,9 @@ class ContainerTest extends TestCase
 
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function test_has_method()
     {
         $container = new Container();
@@ -41,6 +51,11 @@ class ContainerTest extends TestCase
         $this->assertTrue($container->has('no-class'));
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws ContainerException
+     * @throws NotFoundExceptionInterface
+     */
     public function test_recursively_autowired()
     {
         $container = new Container();
