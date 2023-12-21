@@ -5,6 +5,7 @@ namespace Framework\Http;
 use Framework\Http\Exceptions\HttpException;
 use Framework\Routing\RouterInterface;
 use League\Container\Container;
+use PHPUnit\Logging\Exception;
 
 class Kernel
 {
