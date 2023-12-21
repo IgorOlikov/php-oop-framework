@@ -2,14 +2,13 @@
 
 namespace App\Controllers;
 
+use Framework\Controller\AbstractController;
 use Framework\Http\Response;
-use Twig\Environment;
 
-class HomeController
+
+class HomeController extends AbstractController
 {
-    public function __construct(
-        private readonly Environment $twig
-    )
+    public function __construct()
     {
 
     }
@@ -17,7 +16,7 @@ class HomeController
 
     public function index(): Response
     {
-        dd($this->twig);
+        dd($this->container->get('twig'));
 
         $content = 'HELLO WORLD';
 

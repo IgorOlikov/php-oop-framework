@@ -1,6 +1,7 @@
 <?php
 
 
+use Framework\Controller\AbstractController;
 use Framework\Http\Kernel;
 use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
@@ -45,8 +46,10 @@ $container->add(Kernel::class)
 
 $container->addShared('twig-loader', FilesystemLoader::class)
     ->addArgument(new StringArgument($viewsPath));
-$container->addShared(Environment::class)
+$container->addShared('twig',Environment::class)
     ->addArgument('twig-loader');
 
+$container->inflector(AbstractController::class)
+    ->invokeMethod('setContainer', [$container]);
 
 return $container;

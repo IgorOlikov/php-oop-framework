@@ -22,7 +22,7 @@ class Kernel
             [$routeHandler, $vars] = $this->router->dispatch($request,$this->container);
 
             $response = call_user_func_array($routeHandler, $vars);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }
         return $response;
