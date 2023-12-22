@@ -16,11 +16,14 @@ class HomeController extends AbstractController
 
     public function index(): Response
     {
-        dd($this->container->get('twig'));
-
         $content = 'HELLO WORLD';
+        $param = [
+            'param' => 'https://google.com'
+        ];
 
-        return new Response($content);
+
+
+        return $this->render('home.html.twig',['https://google.com']);
     }
 
 }

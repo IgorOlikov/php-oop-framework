@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Controllers;
+use Framework\Controller\AbstractController;
 use Framework\Http\Response;
-class PostController
+class PostController extends AbstractController
 {
 
     public function show(int $id)
     {
-        $content = "POST - $id";
 
-        return new Response($content);
+        return $this->render('posts.html.twig',[
+            'postId' => $id
+        ]);
+
     }
 
 }
