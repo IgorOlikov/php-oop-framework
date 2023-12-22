@@ -16,8 +16,7 @@ class HomeController extends AbstractController
 
     public function index(): Response
     {
-        phpinfo();
-        exit();
+
 
 
 
