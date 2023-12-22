@@ -14,6 +14,7 @@ use League\Container\ReflectionContainer;
 use Symfony\Component\Dotenv\Dotenv;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use \Framework\Console\Kernel as ConsoleKernel;
 
 $dotenv = new Dotenv();
 $dotenv->load(BASE_PATH.'/.env');
@@ -31,6 +32,8 @@ $databaseUrl = 'pdo-mysql://lemp:lemp@database:3306/lemp?charset=utf8mb4';
 $container = new Container();
 
 $container->delegate(new ReflectionContainer(true));
+
+$container->add('framework-commands-namespace',new StringArgument('Framework\\Console\\Commands\\'));
 
 
 $container->add('APP_ENV', new StringArgument($appEnv));
@@ -60,5 +63,7 @@ $container->add(ConnectionFactory::class)
 $container->addShared(Connection::class, function () use ($container): Connection {
      return $container->get(ConnectionFactory::class)->create();
 });
+
+$container->add(ConsoleKernel::class)->addArgument($container);
 
 return $container;
