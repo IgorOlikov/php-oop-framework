@@ -16,6 +16,11 @@ class HomeController extends AbstractController
 
     public function index(): Response
     {
+        phpinfo();
+        exit();
+
+
+
         $content = 'HELLO WORLD';
         $param = [
             'param' => 'https://google.com'
