@@ -12,7 +12,8 @@ class MigrateCommand implements CommandInterface
     private string $name = 'migrate';
     private const MIGRATIONS_TABLE = 'migrations';
     public function __construct(
-        private Connection $connection
+        private Connection $connection,
+        private string $migrationsPath
     )
     {
     }
@@ -26,7 +27,11 @@ class MigrateCommand implements CommandInterface
 
             $appliedMigrations = $this->getAppliedMigrations();
 
-            dd($appliedMigrations);
+            $migrationFiles = $this->getMigrationFiles();
+
+            $migrationsToApply = array_values(array_diff($migrationFiles,$appliedMigrations));
+
+            dd($migrationsToApply);
 
             $this->connection->commit();
         }catch (\Throwable $e) {
@@ -69,8 +74,17 @@ class MigrateCommand implements CommandInterface
              ->from(self::MIGRATIONS_TABLE)
              ->executeQuery()
              ->fetchFirstColumn();
-
-
-
     }
+
+    private function getMigrationFiles(): array
+    {
+        $migrationFiles = scandir($this->migrationsPath);
+
+        $filteredFiles = array_filter($migrationFiles, function ($fileName){
+            return ! in_array($fileName,['.','..']);
+        });
+        return array_values($filteredFiles);
+    }
+
+
 }
