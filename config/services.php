@@ -3,6 +3,7 @@
 
 use Doctrine\DBAL\Connection;
 use Framework\Console\Application;
+use Framework\Console\Commands\MigrateCommand;
 use Framework\Controller\AbstractController;
 use Framework\Dbal\ConnectionFactory;
 use Framework\Http\Kernel;
@@ -71,5 +72,8 @@ $container->add(Application::class)
 $container->add(ConsoleKernel::class)
     ->addArgument($container)
     ->addArgument(Application::class);
+
+$container->add('console:migrate', MigrateCommand::class)
+    ->addArgument(Connection::class);
 
 return $container;
