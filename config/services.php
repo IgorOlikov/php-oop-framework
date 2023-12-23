@@ -2,6 +2,7 @@
 
 
 use Doctrine\DBAL\Connection;
+use Framework\Console\Application;
 use Framework\Controller\AbstractController;
 use Framework\Dbal\ConnectionFactory;
 use Framework\Http\Kernel;
@@ -64,6 +65,11 @@ $container->addShared(Connection::class, function () use ($container): Connectio
      return $container->get(ConnectionFactory::class)->create();
 });
 
-$container->add(ConsoleKernel::class)->addArgument($container);
+$container->add(Application::class)
+    ->addArgument($container);
+
+$container->add(ConsoleKernel::class)
+    ->addArgument($container)
+    ->addArgument(Application::class);
 
 return $container;

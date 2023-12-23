@@ -6,13 +6,20 @@ use Psr\Container\ContainerInterface;
 
 class Kernel
 {
-    public function __construct(private  ContainerInterface $container)
+    public function __construct(
+        private  ContainerInterface $container,
+        private Application $application
+    )
     {
     }
 
     public function handle(): int
     {
         $this->registerCommands();
+
+       $status = $this->application->run();
+
+       dd($status);
 
         return 0;
     }
@@ -38,7 +45,7 @@ class Kernel
             }
 
             }
-            dd($this->container);
+            //dd($this->container);
         }
     }
 
