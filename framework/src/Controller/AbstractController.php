@@ -3,6 +3,7 @@
 namespace Framework\Controller;
 
 
+use Framework\Http\Request;
 use Framework\Http\Response;
 use Psr\Container\ContainerInterface;
 use Twig\Environment;
@@ -10,6 +11,15 @@ use Twig\Environment;
 abstract class AbstractController
 {
     protected ?ContainerInterface $container = null;
+    protected Request $request;
+
+    /**
+     * @param Request $request
+     */
+    public function setRequest(Request $request): void
+    {
+        $this->request = $request;
+    }
 
     public function setContainer(ContainerInterface $container): void
     {

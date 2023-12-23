@@ -63,7 +63,7 @@ $container->add(ConnectionFactory::class)
     ->addArgument(new StringArgument($databaseUrl));
 
 $container->addShared(Connection::class, function () use ($container): Connection {
-     return $container->get(ConnectionFactory::class)->create();
+    return  $container->get(ConnectionFactory::class)->create();
 });
 
 $container->add(Application::class)

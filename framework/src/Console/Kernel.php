@@ -19,9 +19,7 @@ class Kernel
 
        $status = $this->application->run();
 
-       dd($status);
-
-        return 0;
+        return $status;
     }
 
     private function registerCommands():void

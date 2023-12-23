@@ -10,9 +10,7 @@ class ConnectionFactory
     public function __construct(private readonly string $databaseUrl)
     {
 
-
     }
-
     public function create(): Connection
     {
       $connection  = DriverManager::getConnection([
