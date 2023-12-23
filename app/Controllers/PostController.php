@@ -2,11 +2,16 @@
 
 namespace App\Controllers;
 use App\Entities\Post;
+use App\Services\PostService;
 use Framework\Controller\AbstractController;
 use Framework\Http\Request;
 use Framework\Http\Response;
 class PostController extends AbstractController
 {
+
+    public function __construct(private PostService $service)
+    {
+    }
 
     public function show(int $id): Response
     {
@@ -23,12 +28,13 @@ class PostController extends AbstractController
     }
     public function store()
     {
-        $post =  Post::create(
+        $post = Post::create(
             $this->request->postData['title'],
             $this->request->postData['body']
         );
+        $post = $this->service->save($post);
+
         dd($post);
-        //dd($this->request->postData);
     }
 
 }
