@@ -13,7 +13,6 @@ class PostService
     {
     }
 
-
     public function save(Post $post)
     {
         $queryBuilder = $this->connection->createQueryBuilder();
@@ -36,6 +35,36 @@ class PostService
         $post->setId($id);
 
         return $post;
+
+    }
+
+    public function find($id): ?Post
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $result = $queryBuilder
+            ->select('*')
+            ->from('posts')
+            ->where('id = :id')
+            ->setParameter('id', $id)
+            ->executeQuery();
+
+        $post = $result->fetchAllAssociative();
+        if (!$post){
+            return null;
+        }
+        //dd($post[0]);
+
+        $post = $post[0];
+
+
+        return Post::create(
+            title: $post['title'],
+            body: $post['body'],
+            id: $post['id'],
+            createdAt: new \DateTimeImmutable($post['created_at']),
+        );
+
 
     }
 
