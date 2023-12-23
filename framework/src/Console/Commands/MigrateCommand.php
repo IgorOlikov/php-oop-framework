@@ -31,7 +31,17 @@ class MigrateCommand implements CommandInterface
 
             $migrationsToApply = array_values(array_diff($migrationFiles,$appliedMigrations));
 
-            dd($migrationsToApply);
+            $schema = new Schema();
+
+            foreach ($migrationsToApply as $migration){
+                $migrationInstance = require $this->migrationsPath . "/$migration";
+
+                $migrationInstance->up($schema);
+
+                $this->addMigration($migration);
+            }
+
+
 
             $this->connection->commit();
         }catch (\Throwable $e) {
@@ -84,6 +94,16 @@ class MigrateCommand implements CommandInterface
             return ! in_array($fileName,['.','..']);
         });
         return array_values($filteredFiles);
+    }
+
+    private function addMigration(string $migration): void
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $queryBuilder->insert(self::MIGRATIONS_TABLE)
+            ->values(['migration' => ':migration'])
+            ->setParameter('migration', $migration)
+            ->executeQuery();
     }
 
 
