@@ -20,9 +20,9 @@ return new class
         $table->setPrimaryKey(['id']);
     }
 
-    public function down(): void
+    public function down(Schema $schema): void
     {
-        echo get_class($this) . ' method down' . PHP_EOL;
+        //
     }
 
 

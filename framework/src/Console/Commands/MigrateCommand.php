@@ -35,14 +35,13 @@ class MigrateCommand implements CommandInterface
 
             foreach ($migrationsToApply as $migration){
                 $migrationInstance = require $this->migrationsPath . "/$migration";
-
                 $migrationInstance->up($schema);
-
                 $this->addMigration($migration);
             }
-
-
-
+            $sqlArray = $schema->toSql($this->connection->getDatabasePlatform());
+            foreach ($sqlArray as $sql){
+                $this->connection->executeQuery($sql);
+            }
             $this->connection->commit();
         }catch (\Throwable $e) {
             $this->connection->rollBack();
