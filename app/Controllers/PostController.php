@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Entities\Post;
 use App\Services\PostService;
 use Framework\Controller\AbstractController;
+use Framework\Http\RedirectResponse;
 use Framework\Http\Request;
 use Framework\Http\Response;
 class PostController extends AbstractController
@@ -34,6 +35,8 @@ class PostController extends AbstractController
             $this->request->postData['body']
         );
         $post = $this->service->save($post);
+
+        return new RedirectResponse("/posts/{$post->getId()}");
 
 
     }
