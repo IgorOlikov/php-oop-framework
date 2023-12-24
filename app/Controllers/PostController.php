@@ -7,10 +7,15 @@ use Framework\Controller\AbstractController;
 use Framework\Http\RedirectResponse;
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Session\SessionInterface;
+
 class PostController extends AbstractController
 {
 
-    public function __construct(private PostService $service)
+    public function __construct(
+        private PostService $service,
+        private SessionInterface $session
+    )
     {
     }
 
@@ -36,9 +41,13 @@ class PostController extends AbstractController
         );
         $post = $this->service->save($post);
 
+        $this->session->setFlash('success','success');
+
+       // if ($this->session->hasFlash('success')){
+       //     return new Response('success');
+       // }
+
         return new RedirectResponse("/posts/{$post->getId()}");
-
-
     }
 
 }

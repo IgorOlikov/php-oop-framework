@@ -1,6 +1,14 @@
 {% extends 'default.html.twig' %}
 
 {% block main %}
+    {% if session().hasFlash('success') %}
+        <div class="alert alert-success">
+            {% for message in session().getFlash('success') %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <body>
     <h1>{{ post.title }}</h1>
     <p>{{ post.body }}</p>
