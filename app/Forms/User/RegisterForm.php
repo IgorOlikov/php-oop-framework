@@ -2,6 +2,9 @@
 
 namespace App\Forms\User;
 
+use App\Entities\User;
+use App\Services\UserService;
+
 class RegisterForm
 {
     private ?string $name;
