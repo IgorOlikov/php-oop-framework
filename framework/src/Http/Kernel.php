@@ -27,14 +27,17 @@ class Kernel
     {
         try {
             $response = $this->requestHandler->handle($request);
-
-
-
         } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }
         return $response;
     }
+
+    public function terminate(Request $request,Response $response): void
+    {
+        $request->getSession()?->clearFlash();
+    }
+
     private function createExceptionResponse(\Exception $e)
     {
         if (in_array($this->appEnv,['local','testing'])){
@@ -43,8 +46,8 @@ class Kernel
         if ($e instanceof HttpException){
             return Response($e->getMessage(), $e->getStatusCode());
         }
-
         return new Response('Server error',500);
-
     }
+
+
 }
