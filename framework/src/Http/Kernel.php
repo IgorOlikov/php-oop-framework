@@ -4,6 +4,7 @@ namespace Framework\Http;
 
 use Doctrine\DBAL\Connection;
 use Framework\Http\Exceptions\HttpException;
+use Framework\Http\Middleware\RequestHandlerInterface;
 use Framework\Routing\RouterInterface;
 use League\Container\Container;
 use PHPUnit\Logging\Exception;
@@ -11,7 +12,12 @@ use PHPUnit\Logging\Exception;
 class Kernel
 {
     private string $appEnv = 'local';
-    public function __construct(private RouterInterface $router, private Container $container)
+    public function __construct(
+        private RouterInterface $router,
+        private Container $container,
+        private RequestHandlerInterface $requestHandler,
+
+    )
     {
         $this->appEnv = $this->container->get('APP_ENV');
     }
@@ -20,10 +26,11 @@ class Kernel
     public function handle(Request $request): Response
     {
         try {
-            $this->container->get(Connection::class);
-            [$routeHandler, $vars] = $this->router->dispatch($request,$this->container);
+            $response = $this->requestHandler->handle($request);
 
-            $response = call_user_func_array($routeHandler, $vars);
+           // $this->container->get(Connection::class); ????????????????? delete
+           // [$routeHandler, $vars] = $this->router->dispatch($request,$this->container);
+            //$response = call_user_func_array($routeHandler, $vars);
         } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }

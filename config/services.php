@@ -7,6 +7,8 @@ use Framework\Console\Commands\MigrateCommand;
 use Framework\Controller\AbstractController;
 use Framework\Dbal\ConnectionFactory;
 use Framework\Http\Kernel;
+use Framework\Http\Middleware\RequestHandler;
+use Framework\Http\Middleware\RequestHandlerInterface;
 use Framework\Session\SessionInterface;
 use Framework\Template\TwigFactory;
 use League\Container\Argument\Literal\ArrayArgument;
@@ -48,10 +50,15 @@ $container->add(RouterInterface::class,Router::class);
 $container->extend(RouterInterface::class)
     ->addMethodCall('registerRoutes',[new ArrayArgument($routes)]);
 
+$container->add(RequestHandlerInterface::class, RequestHandler::class);
 
 $container->add(Kernel::class)
-    ->addArgument(RouterInterface::class)
-    ->addArgument($container);
+    ->addArguments([
+        RouterInterface::class,
+        $container,
+        RequestHandlerInterface::class
+    ]);
+
 
 
 $container->addShared(SessionInterface::class,Framework\Session\Session::class);
