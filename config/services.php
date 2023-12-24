@@ -9,6 +9,7 @@ use Framework\Dbal\ConnectionFactory;
 use Framework\Http\Kernel;
 use Framework\Http\Middleware\RequestHandler;
 use Framework\Http\Middleware\RequestHandlerInterface;
+use Framework\Http\Middleware\RouterDispatch;
 use Framework\Session\SessionInterface;
 use Framework\Template\TwigFactory;
 use League\Container\Argument\Literal\ArrayArgument;
@@ -94,6 +95,12 @@ $container->add('console:migrate', MigrateCommand::class)
     ->addArgument(Connection::class)
     ->addArgument(new StringArgument(BASE_PATH . '/database/migrations'));
 
+
+$container->add(RouterDispatch::class)
+    ->addArguments([
+        RouterInterface::class,
+        $container
+    ]);
 
 
 return $container;

@@ -28,9 +28,8 @@ class Kernel
         try {
             $response = $this->requestHandler->handle($request);
 
-           // $this->container->get(Connection::class); ????????????????? delete
-           // [$routeHandler, $vars] = $this->router->dispatch($request,$this->container);
-            //$response = call_user_func_array($routeHandler, $vars);
+
+
         } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }
