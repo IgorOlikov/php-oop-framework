@@ -21,11 +21,11 @@ class MigrateCommand implements CommandInterface
     public function execute(array $parameters = []): int
     {
         try {
-            $this->connection->setAutoCommit(false);
+            //$this->connection->setAutoCommit(false);
 
             $this->createMigrationsTable();
 
-            $this->connection->beginTransaction();
+            //$this->connection->beginTransaction();
 
             $appliedMigrations = $this->getAppliedMigrations();
 
@@ -44,14 +44,14 @@ class MigrateCommand implements CommandInterface
             foreach ($sqlArray as $sql){
                 $this->connection->executeQuery($sql);
             }
-            $this->connection->commit();
+           // $this->connection->commit();
         }catch (\Throwable $e) {
-            $this->connection->rollBack();
+           // $this->connection->rollBack();
             throw $e;
         }
 
 
-        $this->connection->setAutoCommit(true);
+        //$this->connection->setAutoCommit(true);
 
         return 0;
     }
