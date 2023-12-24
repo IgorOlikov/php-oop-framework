@@ -49,8 +49,6 @@ class MigrateCommand implements CommandInterface
            // $this->connection->rollBack();
             throw $e;
         }
-
-
         //$this->connection->setAutoCommit(true);
 
         return 0;
