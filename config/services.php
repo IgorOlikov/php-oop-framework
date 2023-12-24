@@ -7,6 +7,8 @@ use Framework\Console\Commands\MigrateCommand;
 use Framework\Controller\AbstractController;
 use Framework\Dbal\ConnectionFactory;
 use Framework\Http\Kernel;
+use Framework\Session\SessionInterface;
+use Framework\Template\TwigFactory;
 use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
@@ -51,10 +53,17 @@ $container->add(Kernel::class)
     ->addArgument(RouterInterface::class)
     ->addArgument($container);
 
-$container->addShared('twig-loader', FilesystemLoader::class)
-    ->addArgument(new StringArgument($viewsPath));
-$container->addShared('twig',Environment::class)
-    ->addArgument('twig-loader');
+
+$container->addShared(SessionInterface::class,Framework\Session\Session::class);
+$container->add('twig-factory', TwigFactory::class)
+    ->addArguments([
+       new StringArgument($viewsPath),
+        SessionInterface::class
+    ]);
+
+$container->addShared('twig', function () use ($container){
+   return $container->get('twig-factory')->create();
+});
 
 $container->inflector(AbstractController::class)
     ->invokeMethod('setContainer', [$container]);
