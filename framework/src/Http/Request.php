@@ -2,8 +2,12 @@
 
 namespace Framework\Http;
 
+use Framework\Session\SessionInterface;
+
 class Request
 {
+
+    private SessionInterface $session;
 
 
     public function __construct(
@@ -31,6 +35,16 @@ class Request
         return $this->server['REQUEST_METHOD'];
     }
 
+    public function getSession(): SessionInterface
+    {
+        return $this->session;
+    }
+
+
+    public function setSession(SessionInterface $session): void
+    {
+        $this->session = $session;
+    }
 
 
 }

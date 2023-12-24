@@ -41,11 +41,7 @@ class PostController extends AbstractController
         );
         $post = $this->service->save($post);
 
-        $this->session->setFlash('success','success');
-
-       // if ($this->session->hasFlash('success')){
-       //     return new Response('success');
-       // }
+        $this->request->getSession()->setFlash('success','post created');
 
         return new RedirectResponse("/posts/{$post->getId()}");
     }
