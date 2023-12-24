@@ -23,7 +23,7 @@ class RegisterController extends AbstractController
             return $this->render('register.html.twig');
         }
 
-        public function register()
+        public function register(): RedirectResponse
         {
             $form = new RegisterForm($this->userService); // user service missing
 

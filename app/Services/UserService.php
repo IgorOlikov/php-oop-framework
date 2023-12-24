@@ -3,17 +3,19 @@
 namespace App\Services;
 
 use App\Entities\User;
+use Doctrine\DBAL\Connection;
 
 class UserService
 {
     public function __construct(
-        private EntityService $service
+        //private EntityService $service
+        private Connection $connection
     ) {
     }
 
     public function save(User $user): User
     {
-        $queryBuilder = $this->service->getConnection()->createQueryBuilder();
+        $queryBuilder = $this->connection->createQueryBuilder();
 
         $queryBuilder
             ->insert('users')
@@ -30,7 +32,7 @@ class UserService
                 'created_at' => $user->getCreatedAt()->format('Y-m-d H:i:s'),
             ])->executeQuery();
 
-        $id = $this->service->save($user);
+        $id = $this->connection->lastInsertId();
 
         $user->setId($id);
 
