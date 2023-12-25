@@ -68,7 +68,8 @@ $container->addShared(SessionInterface::class,Framework\Session\Session::class);
 $container->add('twig-factory', TwigFactory::class)
     ->addArguments([
        new StringArgument($viewsPath),
-        SessionInterface::class
+        SessionInterface::class,
+        SessionAuthInterface::class,
     ]);
 
 $container->addShared('twig', function () use ($container){

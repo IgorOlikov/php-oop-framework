@@ -20,6 +20,7 @@ return [
     Route::post('/register',[RegisterController::class,'register']),
     Route::get('/login',[LoginController::class,'form'], [Guest::class] ),
     Route::post('/login',[LoginController::class,'login']),
+    Route::post('/logout',[LoginController::class,'logout']),
     Route::get('/dashboard',[DashboardController::class,'index'],[Authenticate::class]),
 
 ];
