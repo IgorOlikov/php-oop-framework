@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use App\Controllers\PostController;
@@ -17,5 +18,6 @@ return [
     Route::post('/register',[RegisterController::class,'register']),
     Route::get('/login',[LoginController::class,'form']),
     Route::post('/login',[LoginController::class,'login']),
+    Route::get('/dashboard',[DashboardController::class,'index']),
 
 ];
