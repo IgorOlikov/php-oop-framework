@@ -10,6 +10,7 @@ use Framework\Console\Commands\MigrateCommand;
 use Framework\Controller\AbstractController;
 use Framework\Dbal\ConnectionFactory;
 use Framework\Http\Kernel;
+use Framework\Http\Middleware\ExtractRouteInfo;
 use Framework\Http\Middleware\RequestHandler;
 use Framework\Http\Middleware\RequestHandlerInterface;
 use Framework\Http\Middleware\RouterDispatch;
@@ -110,5 +111,8 @@ $container->add(SessionAuthInterface::class, SessionAuthentication::class)
         UserService::class,
         SessionInterface::class
     ]);
+
+$container->add(ExtractRouteInfo::class)
+    ->addArgument(new ArrayArgument($routes));
 
 return $container;
