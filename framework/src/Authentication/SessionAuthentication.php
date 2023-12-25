@@ -2,13 +2,12 @@
 
 namespace Framework\Authentication;
 
+use Framework\Session\Session;
 use Framework\Session\SessionInterface;
 
 class SessionAuthentication implements SessionAuthInterface
 {
-
     private AuthUserInterface $user;
-
 
     public function __construct(
         private UserServiceInterface $userService,
@@ -35,7 +34,7 @@ class SessionAuthentication implements SessionAuthInterface
 
     public function login(AuthUserInterface $user): void
     {
-       $this->session->set('user_id',$user->getId());
+       $this->session->set(Session::AUTH_KEY,$user->getId());
 
         $this->user = $user;
 
@@ -49,5 +48,10 @@ class SessionAuthentication implements SessionAuthInterface
     public function getUser(): AuthUserInterface
     {
        return  $this->user;
+    }
+
+    public function check(): bool
+    {
+        return $this->session->has(Session::AUTH_KEY);
     }
 }

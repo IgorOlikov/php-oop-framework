@@ -12,6 +12,8 @@ interface SessionAuthInterface
 
     public function getUser(): AuthUserInterface;
 
+    public function check():bool;
+
 
 
 }

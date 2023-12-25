@@ -11,5 +11,4 @@ interface RouterInterface
 
 
 
-        public function registerRoutes(array $routes): void;
 }
