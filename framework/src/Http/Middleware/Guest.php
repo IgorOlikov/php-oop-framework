@@ -8,7 +8,7 @@ use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Session\SessionInterface;
 
-class Authenticate implements MiddlewareInterface
+class Guest implements MiddlewareInterface
 {
 
     public function __construct(
@@ -22,9 +22,8 @@ class Authenticate implements MiddlewareInterface
     {
         $this->session->start();
 
-        if (!$this->auth->check()){
-            $this->session->setFlash('error','unauthenticated 401');
-            return  new RedirectResponse('/login');
+        if ($this->auth->check()){
+            return  new RedirectResponse('/dashboard');
         }
 
         return $handler->handle($request);
