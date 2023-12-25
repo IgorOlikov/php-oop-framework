@@ -1,7 +1,10 @@
 <?php
 
 
+use App\Services\UserService;
 use Doctrine\DBAL\Connection;
+use Framework\Authentication\SessionAuthentication;
+use Framework\Authentication\SessionAuthInterface;
 use Framework\Console\Application;
 use Framework\Console\Commands\MigrateCommand;
 use Framework\Controller\AbstractController;
@@ -102,5 +105,7 @@ $container->add(RouterDispatch::class)
         $container
     ]);
 
+$container->add(SessionAuthInterface::class, SessionAuthentication::class)
+    ->addArgument(UserService::class);
 
 return $container;

@@ -2,7 +2,9 @@
 
 namespace App\Entities;
 
-class User
+use Framework\Authentication\AuthUserInterface;
+
+class User implements AuthUserInterface
 {
 
     public function __construct(

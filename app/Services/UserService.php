@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Entities\User;
 use Doctrine\DBAL\Connection;
+use Framework\Authentication\UserServiceInterface;
+use Framework\Authentication\AuthUserInterface;
 
-class UserService
+class UserService implements UserServiceInterface
 {
     public function __construct(
         //private EntityService $service
@@ -41,7 +43,7 @@ class UserService
 
     public function findByEmail(string $email): ?AuthUserInterface
     {
-        $queryBuilder = $this->service->getConnection()->createQueryBuilder();
+        $queryBuilder = $this->connection->createQueryBuilder();
 
         $result = $queryBuilder->select('*')
             ->from('users')
