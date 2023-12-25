@@ -2,6 +2,7 @@
 
 
 use App\Controllers\HomeController;
+use App\Controllers\LoginController;
 use App\Controllers\PostController;
 use App\Controllers\RegisterController;
 use Framework\Routing\Route;
@@ -14,4 +15,7 @@ return [
     Route::post('/posts',[PostController::class,'store']),
     Route::get('/register',[RegisterController::class,'form']),
     Route::post('/register',[RegisterController::class,'register']),
+    Route::get('/login',[LoginController::class,'form']),
+    Route::post('/login',[LoginController::class,'login']),
+
 ];
