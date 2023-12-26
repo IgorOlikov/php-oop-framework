@@ -13,12 +13,7 @@ $request = Request::createFromGlobals();
 /** @var \League\Container\Container $container */
 $container = require BASE_PATH.'/config/services.php';
 
-$eventDispatcher = $container->get(\Framework\Event\EventDispatcher::class);
-
-$eventDispatcher
-    ->addListener(\Framework\Dbal\Event\EntityPersist::class, new \App\Listeners\HandleEntityListener())
-    ->addListener(\Framework\Http\Events\ResponseEvent::class, new \App\Listeners\InternalErrorListener())
-    ->addListener(\Framework\Http\Events\ResponseEvent::class,new \App\Listeners\ContentLengthListener());
+require_once BASE_PATH . '/bootstrap/bootstrap.php';
 
 $kernel = $container->get(Kernel::class);
 

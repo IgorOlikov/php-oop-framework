@@ -39,7 +39,15 @@ class Response
 
      public function send(): void
      {
-        echo  $this->content;
+        ob_start();
+
+        foreach ($this->headers as $key => $value){
+            header("$key: $value");
+        }
+
+         echo  $this->content;
+
+        ob_end_flush();
      }
 
 
