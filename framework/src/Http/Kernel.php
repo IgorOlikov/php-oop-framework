@@ -30,6 +30,8 @@ class Kernel
         } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }
+
+
         return $response;
     }
 
