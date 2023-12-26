@@ -9,6 +9,7 @@ use Framework\Console\Application;
 use Framework\Console\Commands\MigrateCommand;
 use Framework\Controller\AbstractController;
 use Framework\Dbal\ConnectionFactory;
+use Framework\Event\EventDispatcher;
 use Framework\Http\Kernel;
 use Framework\Http\Middleware\ExtractRouteInfo;
 use Framework\Http\Middleware\RequestHandler;
@@ -55,11 +56,13 @@ $container->add(RouterInterface::class,Router::class);
 $container->add(RequestHandlerInterface::class, RequestHandler::class)
             ->addArgument($container);
 
+$container->addShared(EventDispatcher::class);
+
 $container->add(Kernel::class)
     ->addArguments([
-        RouterInterface::class,
         $container,
-        RequestHandlerInterface::class
+        RequestHandlerInterface::class,
+        EventDispatcher::class,
     ]);
 
 

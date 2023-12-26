@@ -13,6 +13,22 @@ class Response
         http_response_code($this->statusCode);
     }
 
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
      public function send(): void
      {
         echo  $this->content;
@@ -33,5 +49,13 @@ class Response
     {
         return $this->statusCode;
     }
+
+    public function setHeader(string $key,mixed $value):void
+    {
+        $this->headers[$key] = $value;
+    }
+
+
+
 
 }

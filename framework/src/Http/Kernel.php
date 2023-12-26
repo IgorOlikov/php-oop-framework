@@ -3,6 +3,8 @@
 namespace Framework\Http;
 
 use Doctrine\DBAL\Connection;
+use Framework\Event\EventDispatcher;
+use Framework\Http\Events\ResponseEvent;
 use Framework\Http\Exceptions\HttpException;
 use Framework\Http\Middleware\RequestHandlerInterface;
 use Framework\Routing\RouterInterface;
@@ -13,9 +15,9 @@ class Kernel
 {
     private string $appEnv = 'local';
     public function __construct(
-        private RouterInterface $router,
         private Container $container,
         private RequestHandlerInterface $requestHandler,
+        private EventDispatcher $eventDispatcher
 
     )
     {
@@ -31,6 +33,7 @@ class Kernel
             $response = $this->createExceptionResponse($e);
         }
 
+        $this->eventDispatcher->dispatch(new ResponseEvent($request,$response));
 
         return $response;
     }
