@@ -3,8 +3,9 @@
 namespace App\Entities;
 
 use Framework\Authentication\AuthUserInterface;
+use Framework\Dbal\Entity;
 
-class User implements AuthUserInterface
+class User extends Entity implements AuthUserInterface
 {
 
     public function __construct(

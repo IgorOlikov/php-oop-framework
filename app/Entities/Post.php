@@ -2,7 +2,9 @@
 
 namespace App\Entities;
 
-class Post
+use Framework\Dbal\Entity;
+
+class Post extends Entity
 {
 
 
