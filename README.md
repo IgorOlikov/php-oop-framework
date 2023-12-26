@@ -17,3 +17,10 @@ PHP MVC OOP Framework частично собранный из готовых к
 2) Добавление постов 
 
 Как запустить.
+Из корневой папки выполнить команды:
+1) Скачать надстройку над docker-compose - приложение Lando
+2) wget https://files.lando.dev/installer/lando-x64-stable.deb
+   sudo dpkg -i lando-x64-stable.deb
+3) lando build
+4) lando composer update
+5) lando php console migrate
