@@ -1,6 +1,6 @@
 PHP MVC OOP Framework частично собранный из готовых компонентов
 
-# My GIF
+
 ![](https://github.com/IgorOlikov/php-oop-framework/blob/main/example-gif.gif)
 
 
