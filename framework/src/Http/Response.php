@@ -14,6 +14,14 @@ class Response
     }
 
     /**
+     * @param int $statusCode
+     */
+    public function setStatusCode(int $statusCode): void
+    {
+        $this->statusCode = $statusCode;
+    }
+
+    /**
      * @return string
      */
     public function getContent(): string

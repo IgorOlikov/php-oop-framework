@@ -15,7 +15,7 @@ class ContentLengthListener
            $response->setHeader('Content-Length', strlen($response->getContent()));
        }
 
-       dump('content length listener');
+       dd('hello');
 
     }
 

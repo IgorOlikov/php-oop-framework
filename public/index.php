@@ -15,7 +15,9 @@ $container = require BASE_PATH.'/config/services.php';
 
 $eventDispatcher = $container->get(\Framework\Event\EventDispatcher::class);
 
-$eventDispatcher->addListener(\Framework\Http\Events\ResponseEvent::class,new \App\Listeners\ContentLengthListener());
+$eventDispatcher
+    ->addListener(\Framework\Http\Events\ResponseEvent::class, new \App\Listeners\InternalErrorListener())
+    ->addListener(\Framework\Http\Events\ResponseEvent::class,new \App\Listeners\ContentLengthListener());
 
 $kernel = $container->get(Kernel::class);
 
